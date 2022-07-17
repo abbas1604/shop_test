@@ -10,6 +10,10 @@ class Product(models.Model):
     last_update = models.DateTimeField(auto_now_add=True)
 
 
+class Collection(models.Model):
+    title = models.CharField(max_length=255)
+
+
 class Customer(models.Model):
     MEMBERSHIP_BRONZE = 'B'
     MEMBERSHIP_SILVER = 'S'
