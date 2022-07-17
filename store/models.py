@@ -1,6 +1,16 @@
 from django.db import models
 
 
+class Collection(models.Model):
+    title = models.CharField(max_length=255)
+    featured_product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+
+
+class Promotion(models.Model):
+    description = models.CharField(max_length=255)
+    discount = models.FloatField()
+
+
 class Product(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(default='-')
@@ -10,17 +20,6 @@ class Product(models.Model):
     last_update = models.DateTimeField(auto_now_add=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
     promotions = models.ManyToManyField(Promotion)
-
-
-
-class Collection(models.Model):
-    title = models.CharField(max_length=255)
-    featured_product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-
-
-class Promotion(models.Model):
-    description = models.CharField(max_length=255)
-    discount = models.FloatField()
 
 
 class Customer(models.Model):
