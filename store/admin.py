@@ -23,6 +23,7 @@ class InventoryFilter(admin.SimpleListFilter):
 @admin.register(models.Product)
 class ProductModel(admin.ModelAdmin):
     actions = ['clear_inventory']
+    search_fields = ['title']
     list_display = ['title', 'unit_price', 'inventory_status', 'collection_title']
     list_editable = ['unit_price']
     list_filter = ['collection', 'last_update', InventoryFilter]
@@ -56,9 +57,19 @@ class CustomerModel(admin.ModelAdmin):
     search_fields = ['first_name__istartswith', 'last_name__istartswith']
 
 
+class OrderItemInline(admin.StackedInline):
+    autocomplete_fields = ['product']
+    min_num = 1
+    max_num = 10
+    model = models.OrderItem
+    extra = 0
+
+
 @admin.register(models.Order)
 class OrderModel(admin.ModelAdmin):
     list_display = ['id', 'placed_at', 'customer']
+    inlines = [OrderItemInline]
+    autocomplete_fields = ['customer']
 
 
 @admin.register(models.Collection)
