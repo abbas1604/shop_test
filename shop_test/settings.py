@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'store',
+    'store_custom',
     'tags',
     'likes',
     'django.contrib.admin',
@@ -87,10 +88,12 @@ WSGI_APPLICATION = 'shop_test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '*************',
+        'NAME': 'shop_test',
+        # 'NAME': '*************',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': '*********'
+        'PASSWORD': '1604'
+        # 'PASSWORD': '*********'
     }
 }
 
