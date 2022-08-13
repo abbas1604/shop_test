@@ -22,14 +22,8 @@ class InventoryFilter(admin.SimpleListFilter):
             return queryset.filter(inventory__lt=10)
 
 
-class TagInline(GenericTabularInline):
-    autocomplete_fields = ['tag']
-    model = TaggedItem
-
-
 @admin.register(models.Product)
 class ProductModel(admin.ModelAdmin):
-    inlines = [TagInline]
     actions = ['clear_inventory']
     search_fields = ['title']
     list_display = ['title', 'unit_price', 'inventory_status', 'collection_title']
